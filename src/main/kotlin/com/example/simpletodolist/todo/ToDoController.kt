@@ -1,4 +1,4 @@
-package com.example.simpletodolist.controller
+package com.example.simpletodolist.todo
 
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
