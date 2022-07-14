@@ -1,6 +1,6 @@
 package com.example.simpletodolist.todo
 
-import java.util.*
+import java.time.LocalDateTime
 import javax.persistence.*
 
 @Entity
@@ -14,7 +14,14 @@ class ToDoEntity {
 
     lateinit var detail: String
 
-    lateinit var deadline: Date
+    var deadline: LocalDateTime? = null
 
-    var complete: Boolean = false
+    var completion: Boolean = false
+
+    fun create(toDoDto: ToDoDto){
+        this.title = toDoDto.title
+        this.detail = toDoDto.detail
+        this.deadline = toDoDto.deadline
+        this.completion = toDoDto.completion
+    }
 }

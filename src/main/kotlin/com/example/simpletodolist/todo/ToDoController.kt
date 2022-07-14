@@ -1,5 +1,6 @@
 package com.example.simpletodolist.todo
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -8,13 +9,21 @@ import org.springframework.web.bind.annotation.*
 @CrossOrigin("*")
 class ToDoController {
 
+    @Autowired
+    val toDoService: ToDoService? = null
+
     @GetMapping("/get-all-todo")
-    fun getAllToDo(): ResponseEntity<Any> {
-        return ResponseEntity.ok().body("hello")
+    fun getAllToDo(): ResponseEntity<List<ToDoDto>> {
+        return ResponseEntity.ok().body(toDoService!!.getAllToDo())
     }
 
-    @PostMapping("/add-todo")
-    fun addToDo(@RequestBody toDo: Map<String, String>): ResponseEntity<Void>{
+    @PostMapping("/create-todo")
+    fun createToDo(@RequestBody toDo: ToDoDto): ResponseEntity<ToDoDto?> {
+        return ResponseEntity.ok().body(toDoService!!.createToDo(toDo))
+    }
+
+    fun setCompletion(@RequestBody toDoId: Int, complete: Boolean): ResponseEntity<Void>{
+
         return ResponseEntity.ok().build()
     }
 
