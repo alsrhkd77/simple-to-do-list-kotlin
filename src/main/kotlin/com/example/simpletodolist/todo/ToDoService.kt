@@ -8,16 +8,28 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 class ToDoService {
     @Autowired
-    private var toDoRepository:ToDoRepository? = null
+    private var toDoRepository: ToDoRepository? = null
 
-    fun getAllToDo():List<ToDoDto>{
+    fun getAllToDo(): List<ToDoDto> {
         return toDoRepository!!.findAll().map { ToDoDto(it) }
     }
 
-    fun createToDo(data:ToDoDto):ToDoDto?{
-        var toDo:ToDoEntity = ToDoEntity()
+    fun createToDo(data: ToDoDto): ToDoDto? {
+        var toDo: ToDoEntity = ToDoEntity()
         toDo.create(data)
         toDoRepository!!.save(toDo)
         return null
+    }
+
+    fun setCompletion(id: Int, completion: Boolean): Boolean {
+        return try {
+            var todo = toDoRepository!!.findById(id).get()
+            todo.completion = completion
+            toDoRepository!!.save(todo)
+            true
+        } catch (e: Exception) {
+            false
+        }
+
     }
 }

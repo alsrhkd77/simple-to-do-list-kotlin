@@ -22,9 +22,9 @@ class ToDoController {
         return ResponseEntity.ok().body(toDoService!!.createToDo(toDo))
     }
 
-    fun setCompletion(@RequestBody toDoId: Int, complete: Boolean): ResponseEntity<Void>{
-
-        return ResponseEntity.ok().build()
+    @PostMapping("/set-completion")
+    fun setCompletion(@RequestParam toDoId: Int, @RequestParam completion: Boolean): ResponseEntity<Boolean>{
+        return ResponseEntity.ok().body(toDoService!!.setCompletion(toDoId, completion))
     }
 
     @DeleteMapping("/delete-to-do")

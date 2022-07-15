@@ -1,9 +1,16 @@
+# set unicode
+server:
+  servlet:
+    encoding:
+      charset: utf-8
+      force: true
+
 # swagger-ui custom path
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
 
-#h2 database configure
+# h2 database configure
 spring:
   datasource:
     driver-class-name: org.h2.Driver
@@ -15,7 +22,7 @@ spring:
       enabled: true
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true
